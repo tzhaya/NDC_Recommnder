@@ -31,6 +31,12 @@ NDC predicter による候補：
 $
 ```
 
+## ToDo
+
+ * もうちょっとコードをエレガントにしたい。
+ * オプション指定で、解析対象を タイトル＋Description とタイトルのみ、Descriptionのみ、とか切り替えたい。
+ * CSVファイルからのURI読み込み→結果をCSV出力、などできれば。
+
 ## Lisence
 
 CC-BY
