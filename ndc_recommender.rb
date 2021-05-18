@@ -1,5 +1,5 @@
 require "metainspector"
-require 'net/http'
+require "net/http"
 require "json"
 
 # URIをコマンドの引数で指定
