@@ -37,8 +37,8 @@ $
 ## ToDo
 
  * もうちょっとコードをエレガントにしたい。
- * issue #1 オプション指定で、解析対象を タイトル＋Description とタイトルのみ、Descriptionのみ、とか切り替えたい。
- * issue #2 CSVファイルからのURI読み込み→結果をCSV出力、などできれば。
+ * [ ] #1 オプション指定で、解析対象を タイトル＋Description とタイトルのみ、Descriptionのみ、とか切り替えたい。
+ * [ ] #2 CSVファイルからのURI読み込み→結果をCSV出力、などできれば。
 
 ## Lisence
 
