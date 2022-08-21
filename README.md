@@ -11,14 +11,17 @@ NDCの推測には、[NDC Predictor](https://lab.ndl.go.jp/ndc/)  を使用し�
 
 ## Usage
 
-```shell
-$ ruby ndc_recommender.rb {URI}
+```
+Usage: ruby ndc_recommender.rb [options]
+    -t, --title                      add title to predict
+    -u, --uri item                   set URI
+    -h, --help                       show this help
 ```
 
 ### sample
 
 ```shell
-$ ruby ndc_recommender.rb https://www.naro.go.jp/laboratory/carc/
+$ ruby ndc_recommender.rb -u https://www.naro.go.jp/laboratory/carc/
 ページタイトル:
 中日本農業研究センター | 農研機構
 Description:
