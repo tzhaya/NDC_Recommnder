@@ -15,6 +15,7 @@ class AppOption
       o.on('-t',         'add title to predict') { |v| @options[:title] = v }
       o.on('-o [VALUE]', 'output CSV file name') { |v| @options[:outfilename] = v ; }
       o.on('-u VALUE',   'set URI') { |v| @options[:uri] = v }
+      o.on('-f',         'from datafile, not web') { |v| @options[:datafile] = v }
       o.on('-h',         'show this help') {|v| puts o; exit }
       o.parse!(ARGV)
     end
@@ -67,17 +68,28 @@ if option.has?(:outfilename)
     CSV.open(outfilename,'w') do |csv|
       csv << ["URL","Title","Description","NDC 1","NDC 1 Label","NDC 1 score","NDC 2","NDC 2 label","NDC 2 score","NDC 3","NDC 3 label","NDC 3 score"]        ##ヘッダ
     
-    File.foreach(inputfilename){|uri|
-      page = MetaInspector.new(uri)
-      if page.description != "" then
-        param = page.description
-          else
-            param = page.title    
+    CSV.foreach(inputfilename, headers: true){|row|
+      if option.has?(:datafile)
+        then 
+          param = row[0]
+          param = param.gsub(/[\n]/,"")
+          uri = row[1]
+          title = ""
+          description = param
+      else
+        page = MetaInspector.new(row[0])
+        if page.description != "" then
+          param = page.description
+            else
+              param = page.title    
+        end
+        title =  page.title  
+        description = page.description
       end
       res = Net::HTTP.post_form(URI.parse('https://lab.ndl.go.jp/ndc/api/predict'),{ 'bib' => param })
       result = JSON.parse(res.body)
 
-      csv << [uri, page.title, page.description,
+      csv << [uri, title, description,
               "#{result[0]["value"]}","#{result[0]["label"]}","#{result[0]["score"]}",
               "#{result[1]["value"]}","#{result[1]["label"]}","#{result[1]["score"]}",
               "#{result[2]["value"]}","#{result[2]["label"]}","#{result[2]["score"]}"]
